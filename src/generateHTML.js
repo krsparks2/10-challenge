@@ -5,24 +5,24 @@ function populateEngineer(data) {
         var engName = data[i].engineerName;
         var engID = data[i].engineerID;
         var engEmail = data[i].engineerEmail;
-        var engUsername = data[i].engineerUsername;
+        var engGithubUserName = data[i].engineergithubUserName;
 
         var engCard = document.createElement("div");
         var engHeader = document.createElement("h2");
         var engIDEl = document.createElement("p");
         var engEmailEl = document.createElement("p");
-        var engUsernameEl = document.createElement("p");
+        var engGithubUserNameEl = document.createElement("p");
 
         engCard.setAttribute("class", "info");
         engHeader.setAttribute("class","card-title");
         engIDEl.setAttribute("class", "card-text");
         engEmailEl.setAttribute("class", "card-text");
-        engUsernameEl.setAttribute("class", "card-text");
+        engGithubUserNameEl.setAttribute("class", "card-text");
 
         engHeader.innerHTML = "Engineer " + `${engName}`;
         engIDEl.innerHTML = "Office ID " + `${engID}`;
         engEmailEl.innerHTML = "Email " + `${engEmail}`;
-        engUsernameEl.innerHTML = "Github Username " + `${engUsername}`;
+        engGithubUserNameEl.innerHTML = "Github Username " + `${engGithubUserName}`;
     }
 }
 

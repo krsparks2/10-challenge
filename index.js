@@ -11,9 +11,10 @@ const distPath = path.join(DIST_DIR, 'employees.html');
 
 const generateHTML = require('./src/generateHTML.js');
  
-let myData = {};
+let employeeList = [];
 
 // console.log(generateHTML({managerName : 'keli'}));
+// console.log(employeeList);
 
 console.log
 (
@@ -47,24 +48,24 @@ const managerQuestions = [
     },
     {
         type: 'input',
-        message: "What is the Team Manager's office number?",
-        name: 'officNumber',
-        default: 'Office Number',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("A valid office number is required.");
-            }
-            return true;
-        }
-    },
-    {
-        type: 'input',
         message: "What is the Team Manager's email address?",
         name: 'managerEmail',
         default: 'Email Address',
         validate: function (answer) {
             if (answer.length < 1) {
                 return console.log("A valid email address is required.");
+            }
+            return true;
+        }
+    },
+    {
+        type: 'input',
+        message: "What is the Team Manager's office number?",
+        name: 'officeNumber',
+        default: 'Office Number',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                return console.log("A valid office number is required.");
             }
             return true;
         }
@@ -184,7 +185,11 @@ function buildTeam(){
     inquirer
         .prompt(managerQuestions).then((answers) =>{
             // console.log(answers);
-            myData.manager = answers;
+            employeeList.manager = answers;
+            const newEmployee = new Manager(answers.managerName, answers.mangerID, answers.managerEmail, answers.officeNumber)
+            return(newEmployee)
+        })
+        .then(() => {
             menu()
         })
 }
@@ -193,22 +198,30 @@ function addEngineer() {
     inquirer
         .prompt(engineerQuestions).then((answers) => {
             // console.log(answers);
-            myData.engineers = answers;
+            employeeList.engineers = answers;
+            const newEmployee = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.githubUserName)
+            return(newEmployee)
+        })
+        .then(() => {
             menu()
         })
-}
+ }
 
 function addIntern() {
     inquirer
         .prompt(internQuestions).then((answers) => {
             // console.log(answers);
-            myData.intern = answers;
+            employeeList.intern = answers; 
+            const newEmployee = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool)
+            return(newEmployee)
+        })
+        .then(() => {
             menu()
         })
 }
 
 function finishTeam(){
-    generateHTML(myData);
+    generateHTML(employeeList);
 }
 //  function generateHTML() {
     // console.log(answers);
