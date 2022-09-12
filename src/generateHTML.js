@@ -1,3 +1,5 @@
+ 
+
 function populateEngineer(data) {
     for (i = 0; i < data.engineer[i]; i++) {
         var engName = data[i].engineerName;
@@ -24,10 +26,34 @@ function populateEngineer(data) {
     }
 }
 
-function populateIntern (){
-    console.log("intern info")
+
+function populateIntern (data) {
+    for (i = 0; i < data.intern[i]; i++) {
+        var intName = data[i].internName;
+        var intID = data[i].internID;
+        var intEmail = data[i].internEmail;
+        var intSchool = data[i].internSchool;
+
+        var intCard = document.createElement("div");
+        var intHeader = document.createElement("h2");
+        var intIDEl = document.createElement("p");
+        var intEmailEl = document.createElement("p");
+        var intSchoolEl = document.createElement("p");
+
+        intCard.setAttribute("class", "info");
+        intHeader.setAttribute("class","card-title");
+        intIDEl.setAttribute("class", "card-text");
+        intEmailEl.setAttribute("class", "card-text");
+        intSchoolEl.setAttribute("class", "card-text");
+
+        intHeader.innerHTML = "Intern " + `${intName}`;
+        intIDEl.innerHTML = "Employee ID " + `${intID}`;
+        intEmailEl.innerHTML = "Email " + `${intEmail}`;
+        intSchoolEl.innerHTML = "Intern School " + `${intSchool}`;
+    }
 }
 
+//Function to generate HTML
 function generateHTML(data) {
     return `<!DOCTYPE html>
     <html lang="en">
@@ -42,10 +68,10 @@ function generateHTML(data) {
         <div id="manager">
             <h2>Manager ${data.managerName}</h2>
             <div id="info">
-            <p>Employee ID: ${data.managerID}</p>
-            <p>Email: ${data.managerEmail}</p>
-            <p>Office number: ${data.officeNumber}</p>
-        </div>
+                <p>Employee ID: ${data.managerID}</p>
+                <p>Email: ${data.managerEmail}</p>
+                <p>Office number: ${data.managerOffice}</p>
+            </div>
         </div>    
         <div id="engineers">
             ${populateEngineer()}
@@ -56,3 +82,5 @@ function generateHTML(data) {
     </body>
     </html>`
 }
+
+module.exports = generateHTML;

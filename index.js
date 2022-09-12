@@ -9,7 +9,11 @@ const fs = require('fs');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const distPath = path.join(DIST_DIR, 'employees.html');
 
-const create = require('./src/template.js');
+const generateHTML = require('./src/generateHTML.js');
+ 
+let myData = {};
+
+// console.log(generateHTML({managerName : 'keli'}));
 
 console.log
 (
@@ -173,12 +177,14 @@ const menuQuestion = {
     type: 'list',
     message: 'choose option',
     name: 'teamMember',
-    choices: ['add an engineer', 'add an intern', 'finish building my team']
+    choices: ['add an engineer', 'add an intern', 'finish building the team']
 }
 
 function buildTeam(){
     inquirer
         .prompt(managerQuestions).then((answers) =>{
+            // console.log(answers);
+            myData.manager = answers;
             menu()
         })
 }
@@ -186,6 +192,8 @@ function buildTeam(){
 function addEngineer() {
     inquirer
         .prompt(engineerQuestions).then((answers) => {
+            // console.log(answers);
+            myData.engineers = answers;
             menu()
         })
 }
@@ -193,13 +201,22 @@ function addEngineer() {
 function addIntern() {
     inquirer
         .prompt(internQuestions).then((answers) => {
+            // console.log(answers);
+            myData.intern = answers;
             menu()
         })
 }
 
-function generateHTML() {
-
+function finishTeam(){
+    generateHTML(myData);
 }
+//  function generateHTML() {
+    // console.log(answers);
+    // fs.writeFile('employees.html', answers, function (err) {
+    //     if (err) throw err;
+    //     console.log('Saved!');
+    // });
+//  }
 
 function menu (){
     inquirer.prompt(menuQuestion).then((answers) => {
@@ -211,23 +228,9 @@ function menu (){
                 addIntern()
                 break;
             default:
-                generateHTML()
+                finishTeam()
                 break;
         }
-    })
-}
-
-function addEngineer(){
-    inquirer
-    .prompt(engineerQuestions).then((answers) =>{
-        menu()
-    })
-}
-
-function addIntern(){
-    inquirer
-    .prompt(internQuestions).then((answers) =>{
-        menu()
     })
 }
 
