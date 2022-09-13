@@ -221,15 +221,13 @@ function addIntern() {
 }
 
 function finishTeam(){
-    generateHTML(employeeList);
+    // console.log("employee list", employeeList);
+    const employeeListHTML = generateHTML(employeeList);
+    fs.writeFile('employees.html', employeeListHTML, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+    });
 }
-//  function generateHTML() {
-    // console.log(answers);
-    // fs.writeFile('employees.html', answers, function (err) {
-    //     if (err) throw err;
-    //     console.log('Saved!');
-    // });
-//  }
 
 function menu (){
     inquirer.prompt(menuQuestion).then((answers) => {

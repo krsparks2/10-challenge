@@ -1,11 +1,38 @@
  
+function populateManager(data) {
+    // console.log('here is data manager', data);
+    for (i = 0; i < data.manager[i]; i++) {
+        var manName = data[i].managerName;
+        var manID = data[i].managerID;
+        var manEmail = data[i].managerEmail;
+        var manOfficeNumber = data[i].officeNumber;
+
+        var manCard = document.createElement("div");
+        var manHeader = document.createElement("h2");
+        var manIDEl = document.createElement("p");
+        var manEmailEl = document.createElement("p");
+        var manOfficeNumberEl = document.createElement("p");
+
+        manCard.setAttribute("class", "info");
+        manHeader.setAttribute("class","card-title");
+        manIDEl.setAttribute("class", "card-text");
+        manEmailEl.setAttribute("class", "card-text");
+        manOfficeNumberEl.setAttribute("class", "card-text");
+
+        manHeader.innerHTML = "Manager " + `${manName}`;
+        manIDEl.innerHTML = "Office ID " + `${manID}`;
+        manEmailEl.innerHTML = "Email " + `${manEmail}`;
+        manOfficeNumberEl.innerHTML = "Office Number " + `${manOfficeNumber}`;
+    }
+}
 
 function populateEngineer(data) {
-    for (i = 0; i < data.engineer[i]; i++) {
+    //console.log('here is data engineer', data);
+    for (i = 0; i < data.engineers[i]; i++) {
         var engName = data[i].engineerName;
         var engID = data[i].engineerID;
         var engEmail = data[i].engineerEmail;
-        var engGithubUserName = data[i].engineergithubUserName;
+        var engGithubUserName = data[i].githubUserName;
 
         var engCard = document.createElement("div");
         var engHeader = document.createElement("h2");
@@ -22,12 +49,12 @@ function populateEngineer(data) {
         engHeader.innerHTML = "Engineer " + `${engName}`;
         engIDEl.innerHTML = "Office ID " + `${engID}`;
         engEmailEl.innerHTML = "Email " + `${engEmail}`;
-        engGithubUserNameEl.innerHTML = "Github Username " + `${engGithubUserName}`;
+        engOfficeNumberEl.innerHTML = "Github Username " + `${engGithubUserName}`;
     }
 }
 
-
 function populateIntern (data) {
+    // console.log('here is data intern', data);
     for (i = 0; i < data.intern[i]; i++) {
         var intName = data[i].internName;
         var intID = data[i].internID;
@@ -55,6 +82,7 @@ function populateIntern (data) {
 
 //Function to generate HTML
 function generateHTML(data) {
+    // console.log('generate html', data);
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -72,12 +100,15 @@ function generateHTML(data) {
                 <p>Email: ${data.managerEmail}</p>
                 <p>Office number: ${data.managerOffice}</p>
             </div>
-        </div>    
+        </div>     
+        <div id="manager">
+            ${populateManager(data)}
+        </div> 
         <div id="engineers">
-            ${populateEngineer()}
+            ${populateEngineer(data)}
         </div>
         <div id="interns">
-            ${populateIntern()}
+            ${populateIntern(data)}
         </div>
     </body>
     </html>`
