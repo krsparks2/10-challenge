@@ -82,7 +82,7 @@ function populateIntern (data) {
 
 //Function to generate HTML
 function generateHTML(data) {
-    // console.log('generate html', data);
+    console.log('generate html', data);
     return `<!DOCTYPE html>
     <html lang="en">
     <head>

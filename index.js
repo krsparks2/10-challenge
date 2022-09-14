@@ -223,7 +223,7 @@ function addIntern() {
 function finishTeam(){
     // console.log("employee list", employeeList);
     const employeeListHTML = generateHTML(employeeList);
-    fs.writeFile('employees.html', employeeListHTML, function (err) {
+    fs.writeFile('./dist/employees.html', employeeListHTML, function (err) {
         if (err) throw err;
         console.log('Saved!');
     });
